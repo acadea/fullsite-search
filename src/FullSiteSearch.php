@@ -126,7 +126,7 @@ class FullSiteSearch
      */
     private function modelNamespacePrefix()
     {
-        return app()->getNamespace() . 'Models\\';
+        return app()->getNamespace() . config('fullsite-search.model_path') . '\\';
     }
 
     /** Helper function to retrieve resource URL
@@ -148,7 +148,15 @@ class FullSiteSearch
 
         // attempt to get from $mapping. We assume every entry has an `{id}` for us to replace
         if(Arr::has($mapping, $modelClass)){
-            return str_replace('{id}', $model->id, $mapping[$modelClass]);
+            $replace = [
+                '{id}' => $model->id,
+                '{ id }' => $model->id,
+            ];
+            return str_replace(
+                array_keys($replace),
+                array_values($replace),
+                $mapping[$modelClass]
+            );
         }
         // assume /{model-name}/{model_id}
         return URL::to('/' . strtolower($modelName) . '/' . $model->id);

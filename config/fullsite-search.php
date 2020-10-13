@@ -2,6 +2,8 @@
 
 return [
 
+    'model_path' => 'Models',
+
     'exclude' => [
         // example:
         // \App\Models\Comment::class
