@@ -3,7 +3,6 @@
 namespace Acadea\FullSite;
 
 use Illuminate\Support\ServiceProvider;
-use Acadea\FullSite\Facades\Commands\FullSiteCommand;
 
 class FullSiteServiceProvider extends ServiceProvider
 {
@@ -20,6 +19,4 @@ class FullSiteServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/fullsite-search.php', 'fullsite-search');
     }
-
-
 }

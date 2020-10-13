@@ -11,14 +11,13 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class FullSiteSearch
 {
-
     private function parseModelNameFromFile(SplFileInfo $file)
     {
         $filename = $file->getRelativePathname();
 
         // assume model name is equal to file name
         /* making sure it is a php file*/
-        if (substr($filename, -4) !== '.php'){
+        if (substr($filename, -4) !== '.php') {
             return null;
         }
         // removing .php
@@ -27,7 +26,7 @@ class FullSiteSearch
 
     private function filterSearchableModel(?string $classname)
     {
-        if($classname === null){
+        if ($classname === null) {
             return false;
         }
 
@@ -41,7 +40,7 @@ class FullSiteSearch
         $searchable = $reflection->hasMethod('search');
 
         // filter model that has the searchable trait and not in exclude array
-        return $isModel && $searchable && !in_array($reflection->getName(), config('fullsite-search.exclude'), true);
+        return $isModel && $searchable && ! in_array($reflection->getName(), config('fullsite-search.exclude'), true);
     }
 
     public function search(string $keyword)
@@ -61,14 +60,14 @@ class FullSiteSearch
                 // a. `match` -- the match found in our model records
                 // b. `model` -- the related model name
                 // c. `view_link` -- the URL for the user to navigate in the frontend to view the resource
-                return $model::search($keyword)->get()->map(function ($modelRecord) use ($model, $keyword, $classname){
+                return $model::search($keyword)->get()->map(function ($modelRecord) use ($model, $keyword, $classname) {
 
                     // to create the `match` attribute, we need to join the value of all the searchable fields in
                     // our model, ie all the fields defined in our 'toSearchableArray' model method
                     //
                     // We make use of the SEARCHABLE_FIELDS constant in our model
                     // we dont want id in the match, so we filter it out.
-                    $fields = array_filter($model::SEARCHABLE_FIELDS, fn($field) => $field !== 'id');
+                    $fields = array_filter($model::SEARCHABLE_FIELDS, fn ($field) => $field !== 'id');
 
                     // only extracting the relevant fields from our model
                     $fieldsData = $modelRecord->only($fields);
@@ -85,7 +84,7 @@ class FullSiteSearch
                     //
                     // We append or prepend `...` if there are more text before / after our match + neighbouring text
                     // including the found terms
-                    if($searchPos !== false){
+                    if ($searchPos !== false) {
 
                         // the buffer number dictates how many neighbouring characters to display
                         $start = $searchPos - self::BUFFER;
@@ -106,7 +105,7 @@ class FullSiteSearch
                         // if end position went over the total length, there is no need to append `...`
                         $shouldAddPostfix = ($start + $length) < strlen($serializedValues) ;
 
-                        $sliced =  $shouldAddPrefix ? '...' . $sliced : $sliced;
+                        $sliced = $shouldAddPrefix ? '...' . $sliced : $sliced;
                         $sliced = $shouldAddPostfix ? $sliced . '...' : $sliced;
                     }
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues
@@ -115,8 +114,8 @@ class FullSiteSearch
                     $modelRecord->setAttribute('model', $classname);
                     // setting the resource link
                     $modelRecord->setAttribute('view_link', $this->resolveModelViewLink($modelRecord));
-                    return $modelRecord;
 
+                    return $modelRecord;
                 });
             })->flatten(1);
     }
@@ -147,11 +146,12 @@ class FullSiteSearch
         $modelName = Str::kebab(Str::camel($modelName));
 
         // attempt to get from $mapping. We assume every entry has an `{id}` for us to replace
-        if(Arr::has($mapping, $modelClass)){
+        if (Arr::has($mapping, $modelClass)) {
             $replace = [
                 '{id}' => $model->id,
                 '{ id }' => $model->id,
             ];
+
             return str_replace(
                 array_keys($replace),
                 array_values($replace),
@@ -160,7 +160,6 @@ class FullSiteSearch
         }
         // assume /{model-name}/{model_id}
         return URL::to('/' . strtolower($modelName) . '/' . $model->id);
-
     }
 
     public function routes()

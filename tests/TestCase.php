@@ -2,9 +2,9 @@
 
 namespace Acadea\FullSite\Facades\Tests;
 
+use Acadea\FullSite\Facades\FullSiteServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Acadea\FullSite\Facades\FullSiteServiceProvider;
 
 class TestCase extends Orchestra
 {
