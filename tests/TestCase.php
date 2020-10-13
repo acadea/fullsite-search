@@ -1,8 +1,8 @@
 <?php
 
-namespace Acadea\FullSite\Facades\Tests;
+namespace Acadea\FullSite\Tests;
 
-use Acadea\FullSite\Facades\FullSiteServiceProvider;
+use Acadea\FullSite\FullSiteServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -12,9 +12,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Acadea\\FullSite\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+
+
     }
 
     protected function getPackageProviders($app)

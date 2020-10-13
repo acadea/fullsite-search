@@ -163,8 +163,5 @@ class FullSiteSearch
         return URL::to('/' . strtolower($modelName) . '/' . $model->id);
     }
 
-    public function routes()
-    {
-        // register the api routes
-    }
+
 }

@@ -4,7 +4,10 @@ return [
 
     'model_path' => 'Models',
 
-    'api_endpoint' => '/api/site-search',
+    'api' => [
+        'disabled' => false,
+        'url' => '/api/site-search',
+    ],
 
     'exclude' => [
         // example:
