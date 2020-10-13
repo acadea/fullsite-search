@@ -3,7 +3,6 @@
 
 namespace Acadea\FullSite\Controller;
 
-
 use Acadea\FullSite\Facades\FullSite;
 use Acadea\FullSite\Resources\SiteSearchResource;
 use Illuminate\Http\Request;
