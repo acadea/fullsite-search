@@ -85,15 +85,16 @@ class FullSiteSearch
                     // We append or prepend `...` if there are more text before / after our match + neighbouring text
                     // including the found terms
                     if ($searchPos !== false) {
+                        $buffer = config('fullsite-search.buffer');
 
                         // the buffer number dictates how many neighbouring characters to display
-                        $start = $searchPos - self::BUFFER;
+                        $start = $searchPos - $buffer;
 
                         // we don't want to go below 0 as the starting position
                         $start = $start < 0 ? 0 : $start;
 
                         // multiply 2 buffer to cover the text before and after the match
-                        $length = strlen($keyword) + 2 * self::BUFFER;
+                        $length = strlen($keyword) + 2 * $buffer;
 
                         // getting the match and neighbouring text
                         $sliced = substr($serializedValues, $start, $length);
@@ -136,7 +137,7 @@ class FullSiteSearch
     {
         // Here we list down all the alternative model-link mappings
         // if we dont have a record here, will default to /{model-name}/{model_id}
-        $mapping = config('fullsite-search.view-mapping');
+        $mapping = config('fullsite-search.view_mapping');
 
         // getting the Fully Qualified Class Name of model
         $modelClass = get_class($model);
