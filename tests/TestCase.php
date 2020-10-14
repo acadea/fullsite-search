@@ -12,7 +12,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->artisan('migrate',
+        $this->artisan(
+            'migrate',
             ['--database' => 'sqlite']
         )->run();
 
@@ -21,7 +22,6 @@ class TestCase extends Orchestra
         );
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-
     }
 
     protected function getPackageProviders($app)
@@ -44,7 +44,5 @@ class TestCase extends Orchestra
 
 
 //        (new \CreatePackageTable())->up();
-
-
     }
 }

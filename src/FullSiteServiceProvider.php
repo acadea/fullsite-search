@@ -12,8 +12,6 @@ class FullSiteServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/fullsite-search.php' => config_path('fullsite-search.php'),
             ], 'config');
-
-
         }
     }
 
@@ -21,9 +19,8 @@ class FullSiteServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/fullsite-search.php', 'fullsite-search');
 
-        if(!config('fullsite-search.api.disabled')){
+        if (! config('fullsite-search.api.disabled')) {
             FullSiteSearch::routes();
         }
-
     }
 }

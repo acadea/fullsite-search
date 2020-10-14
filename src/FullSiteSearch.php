@@ -106,15 +106,16 @@ class FullSiteSearch
             $sliced = $shouldAddPrefix ? '...' . $sliced : $sliced;
             $sliced = $shouldAddPostfix ? $sliced . '...' : $sliced;
         }
+
         return $sliced ?? substr($serializedValues, 0, 20) . '...';
     }
 
     public static function search(string $keyword)
     {
         // getting all the model files from the model folder
-        if(self::isTesting()){
+        if (self::isTesting()) {
             $files = File::allFiles(__DIR__ . '/../tests/Models');
-        }else{
+        } else {
             $files = File::allFiles(app()->basePath() . '/app/' . config('fullsite-search.model_path'));
         }
 
@@ -132,7 +133,7 @@ class FullSiteSearch
                  * b. `model` -- the related model name
                  * c. `view_link` -- the URL for the user to navigate in the frontend to view the resource
                  */
-                return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $classname){
+                return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $classname) {
 
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues
                     $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $keyword));
@@ -151,9 +152,10 @@ class FullSiteSearch
      */
     private static function modelNamespacePrefix()
     {
-        if(self::isTesting()){
+        if (self::isTesting()) {
             return (new \ReflectionClass(self::class))->getNamespaceName().'\\Tests\\Models\\';
         }
+
         return app()->getNamespace() . config('fullsite-search.model_path') . '\\';
     }
 
@@ -198,6 +200,4 @@ class FullSiteSearch
     {
         Route::get(config('fullsite-search.api.url'), [SiteSearchController::class, 'search']);
     }
-
-
 }

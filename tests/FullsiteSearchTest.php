@@ -16,12 +16,11 @@ class FullsiteSearchTest extends TestCase
         $status = $response->status();
 
         // the service provider is dependent on the preset config file
-        if(config('fullsite-search.api.disabled')){
+        if (config('fullsite-search.api.disabled')) {
             $this->assertTrue($status === 404);
-        }else{
+        } else {
             $this->assertTrue($status !== 404);
         }
-
     }
 
     public function test_can_search()
@@ -29,7 +28,6 @@ class FullsiteSearchTest extends TestCase
         $posts = Post::factory()->count(10)->create();
         $results = FullSiteSearch::search('hey');
         $this->assertInstanceOf(Collection::class, $results);
-
     }
 
     public function test_model_view_link_is_generated_correctly()
@@ -44,8 +42,8 @@ class FullsiteSearchTest extends TestCase
         // testing customised url work
         config([
             'fullsite-search.view_mapping' => [
-                Post::class => '/laksa/{id}'
-            ]
+                Post::class => '/laksa/{id}',
+            ],
         ]);
 
         $link = FullSiteSearch::resolveModelViewLink($post);
@@ -56,7 +54,7 @@ class FullsiteSearchTest extends TestCase
     private function createPost()
     {
         return Post::query()->create([
-            'title' => 'heyy you babararawea we are on fire just test this one out is extremely long is there an end?'
+            'title' => 'heyy you babararawea we are on fire just test this one out is extremely long is there an end?',
         ]);
     }
 
@@ -77,12 +75,11 @@ class FullsiteSearchTest extends TestCase
 
         // changing buffer
         config([
-            'fullsite-search.buffer' => 20
+            'fullsite-search.buffer' => 20,
         ]);
 
         $mid = FullSiteSearch::createMatchAttribute($post, 'test');
 
         $this->assertEquals('...we are on fire just test this one out is ext...', $mid);
-
     }
 }
