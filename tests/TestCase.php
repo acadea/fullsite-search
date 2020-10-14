@@ -12,7 +12,15 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+        $this->artisan('migrate',
+            ['--database' => 'sqlite']
+        )->run();
 
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName) => 'Acadea\\FullSite\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        );
+
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
     }
 
@@ -32,9 +40,11 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_fullsite_search_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+
+
+
+//        (new \CreatePackageTable())->up();
+
+
     }
 }

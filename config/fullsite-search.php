@@ -5,6 +5,7 @@ return [
     'model_path' => 'Models',
 
     'api' => [
+        // enable api endpoint
         'disabled' => false,
         'url' => '/api/site-search',
     ],
