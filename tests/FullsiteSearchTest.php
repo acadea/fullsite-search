@@ -61,13 +61,13 @@ class FullsiteSearchTest extends TestCase
     public function test_create_match_attribute()
     {
         $post = $this->createPost();
+        $fields = ['title'];
 
+        $mid = FullSiteSearch::createMatchAttribute($post, $fields, 'test');
 
-        $mid = FullSiteSearch::createMatchAttribute($post, 'test');
+        $first = FullSiteSearch::createMatchAttribute($post, $fields, 'you');
 
-        $first = FullSiteSearch::createMatchAttribute($post, 'you');
-
-        $end = FullSiteSearch::createMatchAttribute($post, 'there');
+        $end = FullSiteSearch::createMatchAttribute($post, $fields, 'there');
 
         $this->assertEquals('...fire just test this one ...', $mid);
         $this->assertEquals('heyy you babararawea we...', $first);
@@ -78,7 +78,7 @@ class FullsiteSearchTest extends TestCase
             'fullsite-search.buffer' => 20,
         ]);
 
-        $mid = FullSiteSearch::createMatchAttribute($post, 'test');
+        $mid = FullSiteSearch::createMatchAttribute($post, $fields,'test');
 
         $this->assertEquals('...we are on fire just test this one out is ext...', $mid);
     }

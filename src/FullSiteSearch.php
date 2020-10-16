@@ -57,15 +57,8 @@ class FullSiteSearch
      * @param $keyword
      * @param $classname
      */
-    public static function createMatchAttribute(Model $model, $keyword)
+    public static function createMatchAttribute(Model $model, array $fields, $keyword)
     {
-        // to create the `match` attribute, we need to join the value of all the searchable fields in
-        // our model, ie all the fields defined in our 'toSearchableArray' model method
-
-        // We make use of the SEARCHABLE_FIELDS constant in our model
-        // we dont want id in the match, so we filter it out.
-        $fields = array_filter($model::SEARCHABLE_FIELDS, fn ($field) => $field !== 'id');
-
         // only extracting the relevant fields from our model
         $fieldsData = $model->only($fields);
 
@@ -133,10 +126,17 @@ class FullSiteSearch
                  * b. `model` -- the related model name
                  * c. `view_link` -- the URL for the user to navigate in the frontend to view the resource
                  */
-                return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $classname) {
+
+                // to create the `match` attribute, we need to join the value of all the searchable fields in
+                // our model, ie all the fields defined in our 'toSearchableArray' model method
+
+                // We make use of the SEARCHABLE_FIELDS constant in our model
+                // we dont want id in the match, so we filter it out.
+                $fields = array_filter($model::SEARCHABLE_FIELDS, fn ($field) => $field !== 'id');
+                return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $fields, $classname) {
 
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues
-                    $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $keyword));
+                    $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $fields, $keyword));
                     // setting the model name
                     $modelRecord->setAttribute('model', $classname);
                     // setting the resource link
