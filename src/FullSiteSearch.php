@@ -133,6 +133,7 @@ class FullSiteSearch
                 // We make use of the SEARCHABLE_FIELDS constant in our model
                 // we dont want id in the match, so we filter it out.
                 $fields = array_filter($model::SEARCHABLE_FIELDS, fn ($field) => $field !== 'id');
+
                 return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $fields, $classname) {
 
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues

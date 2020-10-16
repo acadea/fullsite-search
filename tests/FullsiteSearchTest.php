@@ -78,7 +78,7 @@ class FullsiteSearchTest extends TestCase
             'fullsite-search.buffer' => 20,
         ]);
 
-        $mid = FullSiteSearch::createMatchAttribute($post, $fields,'test');
+        $mid = FullSiteSearch::createMatchAttribute($post, $fields, 'test');
 
         $this->assertEquals('...we are on fire just test this one out is ext...', $mid);
     }
