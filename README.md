@@ -9,11 +9,11 @@ Laravel package to perform full site search based on Laravel Scout. Bringing the
 
 ## Support us
 
-Learn the idea behind this package in:
+Learn the idea behind this package in my:
 
-[Medium Blog]()
-
-[Youtube Lesson]()
+* [Medium Blog]()
+* [Youtube Lesson](https://www.youtube.com/watch?v=yuG1kS9WFz0)
+  
 
 Follow us on Youtube: [Acadea.io](https://www.youtube.com/channel/UCU5RsUGkVcPM9QvFHyKm1OQ)
 
