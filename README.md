@@ -7,6 +7,16 @@
 
 Laravel package to perform full site search based on Laravel Scout. Bringing the `search everything` box to live in a laravel app.
 
+## Support us
+
+Learn the idea behind this package in:
+
+[Medium Blog]()
+
+[Youtube Lesson]()
+
+Follow us on Youtube: [Acadea.io](https://www.youtube.com/channel/UCU5RsUGkVcPM9QvFHyKm1OQ)
+
 ## Quick Start
 
 ```php
@@ -58,11 +68,6 @@ We get:
     ]
 }
 ```
-
-## Support us
-
-Follow us on Youtube: [Acadea.io](https://www.youtube.com/channel/UCU5RsUGkVcPM9QvFHyKm1OQ)
-
 
 ## Installation
 
