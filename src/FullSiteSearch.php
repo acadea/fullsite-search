@@ -118,7 +118,7 @@ class FullSiteSearch
             ->filter([self::class, 'filterSearchableModel'])
             ->map(function ($classname) use ($keyword) {
                 // for each class, call the search function
-                /** @var $model Model*/
+                /** @var $model Model */
                 $model = app(self::modelNamespacePrefix() . $classname);
 
                 /**
@@ -141,14 +141,14 @@ class FullSiteSearch
                     ->map(function (Model $modelRecord) use ($keyword, $fields, $classname) {
 
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues
-                    $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $fields, $keyword));
-                    // setting the model name
-                    $modelRecord->setAttribute('model', $classname);
-                    // setting the resource link
-                    $modelRecord->setAttribute('view_link', self::resolveModelViewLink($modelRecord));
+                        $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $fields, $keyword));
+                        // setting the model name
+                        $modelRecord->setAttribute('model', $classname);
+                        // setting the resource link
+                        $modelRecord->setAttribute('view_link', self::resolveModelViewLink($modelRecord));
 
-                    return $modelRecord;
-                });
+                        return $modelRecord;
+                    });
             })->flatten(1);
     }
 
