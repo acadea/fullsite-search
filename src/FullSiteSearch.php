@@ -118,6 +118,7 @@ class FullSiteSearch
             ->filter([self::class, 'filterSearchableModel'])
             ->map(function ($classname) use ($keyword) {
                 // for each class, call the search function
+                /** @var $model Model*/
                 $model = app(self::modelNamespacePrefix() . $classname);
 
                 /**
@@ -134,7 +135,10 @@ class FullSiteSearch
                 // we dont want id in the match, so we filter it out.
                 $fields = array_filter($model::SEARCHABLE_FIELDS, fn ($field) => $field !== 'id');
 
-                return $model::search($keyword)->get()->map(function (Model $modelRecord) use ($keyword, $fields, $classname) {
+                return $model::search($keyword)
+                    ->take(config('fullsite-search.search_limit_per_model'))
+                    ->get()
+                    ->map(function (Model $modelRecord) use ($keyword, $fields, $classname) {
 
                     // use $slice as the match, otherwise if undefined we use the first 20 character of serialisedValues
                     $modelRecord->setAttribute('match', self::createMatchAttribute($modelRecord, $fields, $keyword));

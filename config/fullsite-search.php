@@ -11,6 +11,9 @@ return [
         'url' => '/api/site-search',
     ],
 
+    // the result limit per model when conducting the search
+    'search_limit_per_model' => 5,
+
     // you can put any models that you want to exclude from the search here
     'exclude' => [
         // example:
