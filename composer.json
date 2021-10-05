@@ -11,14 +11,14 @@
         {
             "name": "sam-ngu",
             "email": "opensource@acadea.io",
-            "homepage": "https://spatie.be",
+            "homepage": "https://acadea.io",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "illuminate/contracts": "^8.0",
-        "laravel/scout": "^8.3"
+        "laravel/scout": "^8.3|^9.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -33,7 +33,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Acadea\\FullSite\\Tests\\": "tests"
+            "Acadea\\FullSite\\Tests\\": "tests",
+            "Acadea\\FullSite\\Tests\\Database\\": "tests/database"
         }
     },
     "scripts": {
