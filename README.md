@@ -18,6 +18,9 @@ Learn the idea behind this package in my:
 Follow us on Youtube: [https://www.youtube.com/channel/acadeaio](https://www.youtube.com/channel/UCU5RsUGkVcPM9QvFHyKm1OQ)
 
 Buy us a coffee: [https://www.buymeacoffee.com/acadea](https://www.buymeacoffee.com/acadea)
+
+Paypal: [https://www.paypal.com/donate/?hosted_button_id=HPD9HHN3HBPDC](https://www.paypal.com/donate/?hosted_button_id=HPD9HHN3HBPDC)
+
 ## Quick Start
 
 ```php
